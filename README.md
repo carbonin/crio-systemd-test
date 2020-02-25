@@ -4,8 +4,9 @@
 2. `oc apply -f buildconfigs.yaml`
 3. `oc start-build manageiq-httpd; oc start-build test-httpd`
 4. Wait for builds to finish
-5. `oc apply -f <deploy-file>`
-6. `oc exec <pod-name> -- systemctl status httpd`
+5. `oc adm policy add-scc-to-user anyuid system:serviceaccount:test-httpd:anyuid`
+6. `oc apply -f <deploy-file>`
+7. `oc exec <pod-name> -- systemctl status httpd`
 
 Working step 6 output:
 ```
