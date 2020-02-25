@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: List
+items:
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    name: manageiq-httpd
+  spec:
+    source:
+      git:
+        ref: master
+        uri: 'https://github.com/carbonin/crio-systemd-test'
+      type: Git
+    strategy:
+      type: Docker
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+    output:
+      to:
+        kind: ImageStreamTag
+        name: manageiq-httpd:latest
+- apiVersion: build.openshift.io/v1
+  kind: BuildConfig
+  metadata:
+    name: test-httpd
+  spec:
+    source:
+      git:
+        ref: master
+        uri: 'https://github.com/carbonin/crio-systemd-test'
+      type: Git
+    strategy:
+      type: Docker
+      dockerStrategy:
+        dockerfilePath: Dockerfile.test
+    output:
+      to:
+        kind: ImageStreamTag
+        name: test-httpd:latest
