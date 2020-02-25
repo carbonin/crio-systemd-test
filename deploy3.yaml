@@ -40,6 +40,11 @@ items:
               port: 80
             initialDelaySeconds: 10
             timeoutSeconds: 3
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                - "/usr/bin/save-container-environment"
         serviceAccountName: anyuid
         nodeSelector:
           runtime: cri-o
