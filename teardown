@@ -1,0 +1,12 @@
+#!/bin/bash
+
+oc delete sa anyuid
+
+oc delete deploy manageiq-httpd
+oc delete deploy test-httpd
+
+oc delete is manageiq-httpd
+oc delete is test-httpd
+
+oc delete bc manageiq-httpd
+oc delete bc test-httpd
