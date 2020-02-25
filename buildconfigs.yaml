@@ -1,6 +1,20 @@
 apiVersion: v1
 kind: List
 items:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    name: manageiq-httpd
+  spec:
+    tags:
+    - name: latest
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    name: test-httpd
+  spec:
+    tags:
+    - name: latest
 - apiVersion: build.openshift.io/v1
   kind: BuildConfig
   metadata:
@@ -9,7 +23,7 @@ items:
     source:
       git:
         ref: master
-        uri: 'https://github.com/carbonin/crio-systemd-test'
+        uri: 'https://github.com/ManageIQ/container-httpd'
       type: Git
     strategy:
       type: Docker
@@ -31,8 +45,6 @@ items:
       type: Git
     strategy:
       type: Docker
-      dockerStrategy:
-        dockerfilePath: Dockerfile.test
     output:
       to:
         kind: ImageStreamTag

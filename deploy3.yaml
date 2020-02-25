@@ -22,7 +22,7 @@ items:
       spec:
         containers:
         - name: manageiq-httpd
-          image: image-registry.openshift-image-registry.svc:5000/test-httpd/manageiq-httpd:latest
+          image: docker-registry.default.svc:5000/test-httpd/manageiq-httpd:latest
           ports:
           - containerPort: 80
             protocol: TCP
@@ -41,6 +41,8 @@ items:
             initialDelaySeconds: 10
             timeoutSeconds: 3
         serviceAccountName: anyuid
+        nodeSelector:
+          runtime: cri-o
 - apiVersion: apps/v1
   kind: Deployment
   metadata:
@@ -58,7 +60,7 @@ items:
       spec:
         containers:
         - name: test-httpd
-          image: image-registry.openshift-image-registry.svc:5000/test-httpd/test-httpd:latest
+          image: docker-registry.default.svc:5000/test-httpd/test-httpd:latest
           ports:
           - containerPort: 80
             protocol: TCP
@@ -77,3 +79,5 @@ items:
             initialDelaySeconds: 10
             timeoutSeconds: 3
         serviceAccountName: anyuid
+        nodeSelector:
+          runtime: cri-o
